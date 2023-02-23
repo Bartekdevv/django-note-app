@@ -1,3 +1,0 @@
-[submodule "django_note_app/django_note_app_frontend/django-note-app"]
-	path = django_note_app/django_note_app_frontend/django-note-app
-	url = https://github.com/Bartekdevv/django-note-app
