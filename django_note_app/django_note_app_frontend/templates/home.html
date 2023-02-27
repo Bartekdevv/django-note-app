@@ -3,19 +3,43 @@
         Home
     {% endblock title %}
     {% block content %}
-        <div class="container">
-            <div class="vertical-container bg-body shadow rounded-3 m-5">
-                <div class="d-flex justify-content-center">
-                    <h2 class="text-black"> Notes </h2>
+        <div class="vertical-container bg-body shadow rounded-3 m-5 p-4">
+            <div class="d-flex justify-content-center">
+                <h2 class="text-black"> Notes </h2>
+            </div>
+            <div class="container d-flex justify-content-end">
+                <button id="create_btn" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal"> new note </button>
+            </div>
+            {% for note in Notes%}
+            <div class="container bg-primary-subtle mt-4">
+                <div class="d-flex justify-content-between">
+                    <h5 class="text-info-emphasis"> {{ note.field }} </h5>
+                    <div class="text-body-emphasis"> {{ note.created_at }} </div>
                 </div>
-                <div class="w-50 d-flex mx-auto rounded-3 shadow">
-                    <form class="form-control">
-                        <table class="tablev table-borderless">
-                            {{ NoteForm.as_table}}
-                        </table>
-                        <button class="btn btn-primary float-end"> Create </button>
-                    </form>
+                <div>
+                    <div class="text-break"> {{ note.text }} </div>
                 </div>
             </div>
-        </div>
+            {% endfor %}
+            <div class="modal fade" id="modal" tabindex="-1">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title">New Note</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="d-flex">
+                            <form action="create/" method="POST">
+                                {% csrf_token %}
+                                <table class="tablev table-borderless">
+                                    {{ NoteForm.as_table}}
+                                </table>
+                                <button class="btn btn-primary float-end"> Create </button>
+                            </form>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+              </div>              
     {% endblock content %}

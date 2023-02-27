@@ -12,6 +12,10 @@ class Field(models.Model):
 
 class Note(models.Model):
     id = models.BigAutoField(primary_key=True)
-    field = models.ForeignKey(Field, on_delete=models.CASCADE, default=Field.objects.get(description="General"))
+    field = models.ForeignKey(
+        Field,
+        on_delete=models.CASCADE,
+        default=Field.objects.get(description="General"),
+    )
     text = models.TextField()
-    created_at = models.DateField(default=now)
+    created_at = models.DateField(auto_now=True)
