@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django_note_app_frontend.models import Field, Note
-from django_note_app_frontend.forms import NoteForm, DeleteCheck
+from django_note_app_frontend.forms import NoteForm
 from django.views.decorators.http import require_GET, require_POST
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse
@@ -14,7 +14,6 @@ def home(request):
     context = {
         "Fields": Field.objects.all(),
         "Notes": Note.objects.order_by("-created_at"),
-        "delete_check": DeleteCheck(),
         "NoteForm": NoteForm(),
     }
     return render(request, "home.html", context)
