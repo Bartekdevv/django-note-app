@@ -2,26 +2,46 @@
     {% block title %}
         Home
     {% endblock title %}
+    {% block navbar %}
+        <button class="btn btn-danger me-2"> Delete selected </button>
+        <button id="create_btn" class="btn btn-primary me-2" data-bs-toggle="modal" data-bs-target="#modal"> New note </button>
+    {% endblock navbar %}
     {% block content %}
         <div class="vertical-container bg-body shadow rounded-3 m-5 p-4">
             <div class="d-flex justify-content-center">
                 <h2 class="text-black"> Notes </h2>
             </div>
-            <div class="container d-flex justify-content-end">
-                <button id="create_btn" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal"> new note </button>
-            </div>
-            {% for note in Notes%}
-            <div class="container bg-primary-subtle mt-4">
-                <div class="d-flex justify-content-between">
-                    <h5 class="text-info-emphasis"> {{ note.field }} </h5>
-                    <div class="text-body-emphasis"> {{ note.created_at }} </div>
+            {% if not Notes%}
+                <div class="card">
+                    <div class="card-header">
+                        <h5> There are no notes yet </h5>
+                    </div>
+                    <div class="card-body">
+                        Create a new One
+                    </div>
                 </div>
-                <div>
-                    <div class="text-break"> {{ note.text }} </div>
-                </div>
-            </div>
-            {% endfor %}
-            <div class="modal fade" id="modal" tabindex="-1">
+            {% else %}
+                {% for field in Fields%}
+
+                {% endfor %}
+                {% for note in Notes%}
+                    <div class="flex-row">
+                        <div>
+                            {{ delete_check }}
+                        </div>
+                        <div class="container bg-primary-subtle mt-4">
+                            <div class="d-flex justify-content-between">
+                                <h5 class="text-info-emphasis"> {{ note.field }} </h5>
+                                <div class="text-body-emphasis"> {{ note.created_at }} </div>
+                            </div>
+                            <div>
+                                <div class="text-break"> {{ note.text }} </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% endif %}
+            <div class="modal fade" id="modal">
                 <div class="modal-dialog">
                   <div class="modal-content">
                     <div class="modal-header">
@@ -30,7 +50,7 @@
                     </div>
                     <div class="modal-body">
                         <div class="d-flex">
-                            <form action="create/" method="POST">
+                            <form action={% url 'note:new_note'%} method="POST">
                                 {% csrf_token %}
                                 <table class="tablev table-borderless">
                                     {{ NoteForm.as_table}}

@@ -10,6 +10,15 @@
         <script src={% static 'js/jquery-3.6.3.min.js' %}></script>
     </head>
     <body class="min-vh-100">
+        <nav class="navbar bg-secondary bg-gradient sticky-top">
+            <div class="container-fluid justify-content-end">
+                {% block navbar %}
+                {% endblock navbar %}
+                {% if user.is_authenticated %}
+                    <a class="btn btn-danger" href="{% url 'note:logout_view'%}"> Log out </a>
+                {% endif %}
+            </div>
+        </nav>
         {% block content %}
         {% endblock content%}
     </body>

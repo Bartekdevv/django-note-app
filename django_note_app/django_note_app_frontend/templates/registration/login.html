@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="d-flex">
+        <form method="POST">
+            {% csrf_token %}
+            <table class="table table-borderless">
+                {{ form.as_table}}
+            </table>
+            <button class="btn btn-primary float-end"> Log in </button>
+        </form>
+    </div>
+{% endblock content %}
