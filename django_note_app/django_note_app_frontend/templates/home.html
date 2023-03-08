@@ -3,15 +3,15 @@
         Home
     {% endblock title %}
     {% block navbar %}
-        <button class="btn btn-danger me-2"> Delete selected </button>
         <button id="create_btn" class="btn btn-primary me-2" data-bs-toggle="modal" data-bs-target="#modal"> New note </button>
+        <button class="btn btn-danger me-2" type="submit" form="delete-form"> Delete selected </button>
     {% endblock navbar %}
     {% block content %}
         <div class="vertical-container bg-body shadow rounded-3 m-5 p-4">
             <div class="d-flex justify-content-center">
                 <h2 class="text-black"> Notes </h2>
             </div>
-            {% if not Notes%}
+            {% if not Notes %}
                 <div class="card">
                     <div class="card-header">
                         <h5> There are no notes yet </h5>
@@ -26,10 +26,7 @@
                 {% endfor %}
                 {% for note in Notes%}
                     <div class="flex-row">
-                        <div>
-                            {{ delete_check }}
-                        </div>
-                        <div class="container bg-primary-subtle mt-4">
+                        <div class="container bg-primary-subtle mt-4 rounded">
                             <div class="d-flex justify-content-between">
                                 <h5 class="text-info-emphasis"> {{ note.field }} </h5>
                                 <div class="text-body-emphasis"> {{ note.created_at }} </div>
